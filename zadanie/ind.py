@@ -14,15 +14,13 @@
 def decorate_function(func):
     start = 5
 
-    def arg(message):
+    def wrapper(*message):
         summ = 0
-        lst = message.split(' ')
-        for i in lst:
-            i = int(i)
+        for i in message:
             summ += i
         summ += start
         func(summ)
-    return arg
+    return wrapper
 
 
 @decorate_function
@@ -31,4 +29,4 @@ def main(message):
 
 
 if __name__ == '__main__':
-    main(input('Введите целые числа через пробел: '))
+    main(*list(map(int, input('Введите список чисел: ').split(' '))))
