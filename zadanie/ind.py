@@ -11,21 +11,24 @@
 """
 
 
-def decorate_function(func):
-    start = 5
+def my_decorate(start):
 
-    def wrapper(*message):
-        summ = 0
-        for i in message:
-            summ += i
-        summ += start
-        func(summ)
+    def wrapper(func):
+
+        def wrapped(*message):
+            summ = 0
+            for i in message:
+                summ += i
+            summ += start
+            func(summ)
+        return wrapped
+
     return wrapper
 
 
-@decorate_function
+@my_decorate(start=5)
 def main(message):
-    print("Сумма чисел со start=5: ", message)
+    print("Сумма чисел со start: ", message)
 
 
 if __name__ == '__main__':
